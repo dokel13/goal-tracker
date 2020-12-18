@@ -19,26 +19,18 @@ import java.util.List;
 
 public class RequestProcessingJWTFilter extends GenericFilterBean {
 
-    // цей фільтр реагує на всі url
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // оголошуємо пустий об'єкт аутентифікації
         Authentication authentication = null;
-
-        //  підганяємо запит під клас HttpServletRequest
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-
-        // дістаємо токен з header-а запиту
         String token = httpServletRequest.getHeader("Authorization");
 
-        // якщо токен існує, то розшифровуємо його, і створюємо об'єкт аутентифікації authentication
         if (token != null) {
             String user = Jwts.parser()
                     .setSigningKey("yes".getBytes())
                     .parseClaimsJws(token.replace("Bearer", ""))
                     .getBody()
                     .getSubject();
-            System.out.println(user + "!!!!!!!!!!!---!!!!!");
 
             String[] array = user.split(" ");
             List<GrantedAuthority> authorities = new ArrayList<>();
@@ -46,11 +38,8 @@ public class RequestProcessingJWTFilter extends GenericFilterBean {
 
             authentication = new UsernamePasswordAuthenticationToken(array[0], null, authorities);
         }
-
-        // запихаємо об'єкт аутентифікації в контекст security
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // передаємо ланцюг дій далі
         chain.doFilter(request, response);
     }
 }

@@ -25,7 +25,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     private UserService userDetailsService;
 
-    //конструктор нашого фільтра
     public LoginFilter(String url, AuthenticationManager authManager, UserService userDetailsService) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
@@ -34,13 +33,9 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
-        //підганяємо наш запит під клас юзера
-        System.out.println("attemptAuthentication:");
         User user = new ObjectMapper()
                 .readValue(httpServletRequest.getInputStream(), User.class);
-        System.out.println(user);
 
-        //аутентифіковуємось, і повертаємо об'єкт аутентифікації
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
@@ -56,20 +51,16 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
 
-        //після успішного виконання попереднього методу, створюємо токен і додаємо його в header відповіді
         UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
         String jwt_user_token = userDetails.getUsername() + " ";
         for (GrantedAuthority authority : userDetails.getAuthorities()) {
             jwt_user_token += authority.getAuthority();
         }
-        System.out.println(jwt_user_token);
 
         String jwtoken = Jwts.builder()
                 .setSubject(jwt_user_token)
                 .signWith(SignatureAlgorithm.HS512, "yes".getBytes())
-//                .setExpiration(new Date(System.currentTimeMillis() + 200000))
                 .compact();
         res.addHeader("Authorization", "Bearer " + jwtoken);
-        System.out.println(res.getHeader("Authorization"));
     }
 }
