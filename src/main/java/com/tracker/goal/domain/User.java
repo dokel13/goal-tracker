@@ -32,8 +32,6 @@ public class User implements UserDetails {
 
     private String name;
 
-    private String surname;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

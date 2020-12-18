@@ -13,7 +13,7 @@ import java.io.IOException;
 @Component
 public class WrongAuthenticationHandler implements AuthenticationFailureHandler {
 
-    private static final String REDIRECT_STRING = "/api/home?";
+    private static final String REDIRECT_STRING = "/api/wrong-authentication?";
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
