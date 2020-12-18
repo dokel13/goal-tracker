@@ -1,5 +1,6 @@
 package com.tracker.goal.configuration;
 
+import com.tracker.goal.configuration.filter.LoginFilter;
 import com.tracker.goal.configuration.handler.AuthenticationHandler;
 import com.tracker.goal.configuration.handler.WrongAuthenticationHandler;
 import com.tracker.goal.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
@@ -65,6 +67,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
                 .and()
-                .exceptionHandling();
+                .exceptionHandling()
+        .and().addFilterBefore(new LoginFilter("/api/login", authenticationManager(), userService), UsernamePasswordAuthenticationFilter.class);
     }
 }

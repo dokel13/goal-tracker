@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("email - " + email);
         UserEntity user = userRepository.findByEmail(email);
         if (user == null) {
             String message = "Login exception! User doesn`t exist!";

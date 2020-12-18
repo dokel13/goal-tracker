@@ -28,6 +28,7 @@ public class AuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        Authentication authentication) throws IOException {
+        System.out.println("AuthenticationHandler.handle - "+request.getAttributeNames().toString());
         RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
         String targetUrl = determineTargetUrl(authentication) + request.getQueryString();
         if (response.isCommitted()) {

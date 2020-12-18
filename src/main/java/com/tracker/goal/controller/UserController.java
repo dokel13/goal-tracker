@@ -24,6 +24,7 @@ public class UserController {
 
     @PostMapping("/register")
     public User register(@RequestBody User newUser) {
+        System.out.println(newUser);
         User user = userService.register(User.builder()
                 .role(Role.USER)
                 .email(newUser.getEmail())
