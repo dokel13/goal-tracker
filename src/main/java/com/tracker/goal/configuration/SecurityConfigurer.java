@@ -1,6 +1,7 @@
 package com.tracker.goal.configuration;
 
 import com.tracker.goal.configuration.filter.LoginFilter;
+import com.tracker.goal.configuration.filter.RequestProcessingJWTFilter;
 import com.tracker.goal.configuration.handler.AuthenticationHandler;
 import com.tracker.goal.configuration.handler.WrongAuthenticationHandler;
 import com.tracker.goal.service.UserService;
@@ -68,6 +69,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
                 .and()
                 .exceptionHandling()
-        .and().addFilterBefore(new LoginFilter("/api/login", authenticationManager(), userService), UsernamePasswordAuthenticationFilter.class);
+                .and()
+                .addFilterBefore(new RequestProcessingJWTFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new LoginFilter("/api/login", authenticationManager(), userService), UsernamePasswordAuthenticationFilter.class);
     }
 }
