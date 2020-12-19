@@ -18,9 +18,9 @@ public class BadgeEntity {
     @Column(name = "badge_id", nullable = false)
     private int id;
 
-
-    @Column(name = "badge_id", unique = true, nullable = false)
-    private int id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false)
+    private UserEntity user;
 
 
 }

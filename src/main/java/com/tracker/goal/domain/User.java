@@ -1,5 +1,7 @@
 package com.tracker.goal.domain;
 
+import com.tracker.goal.entity.BadgeEntity;
+import com.tracker.goal.entity.GoalEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,13 +26,17 @@ public class User implements UserDetails {
 
     private Role role;
 
-    @Pattern(regexp = "^/\\S+@\\S+\\.\\S+/$", message = "Wrong email!")
+    @Pattern(regexp = "^\\S+@\\S+\\.\\S+$", message = "Wrong email!")
     @NotEmpty
     private String email;
 
     private String password;
 
     private String name;
+
+    private List<GoalEntity> goals;
+
+    private List<BadgeEntity> badges;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

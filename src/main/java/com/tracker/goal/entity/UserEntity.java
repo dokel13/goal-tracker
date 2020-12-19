@@ -31,14 +31,17 @@ public class UserEntity {
     @Column(name = "role", nullable = false, length = 45)
     private String role;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "users_badges", joinColumns = {
-            @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {
-            @JoinColumn(name = "badge", referencedColumnName = "badge_id", nullable = false, updatable = false)})
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    @JoinTable(name = "users_badges", joinColumns = {
+//            @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false, updatable = false)},
+//            inverseJoinColumns = {
+//            @JoinColumn(name = "badge", referencedColumnName = "badge_id", nullable = false, updatable = false)})
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GoalEntity> goals;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BadgeEntity> badges;
 
     public UserEntity(String email, String password, String name, String role) {
         this.email = email;
