@@ -1,7 +1,6 @@
 package com.tracker.goal.repository;
 
 import com.tracker.goal.entity.BadgeEntity;
-import com.tracker.goal.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
