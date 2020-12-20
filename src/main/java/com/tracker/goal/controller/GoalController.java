@@ -17,7 +17,7 @@ public class GoalController extends UserGetter {
     private GoalService goalService;
 
     @GetMapping
-    public List<Goal> getGoals() {
+    public List<Goal> getGoals(){
         return goalService.findAllByUserId(getUserFromContext().getId());
     }
 

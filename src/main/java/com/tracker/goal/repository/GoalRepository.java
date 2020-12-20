@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface GoalRepository extends JpaRepository<GoalEntity, Integer> {
 
+    List<GoalEntity> findAllByUser_Id(Integer userId);
     List<Goal> findAllByUser(Integer userId);
 
     List<GoalEntity> findAllByStatusAndUser(String status, UserEntity user);

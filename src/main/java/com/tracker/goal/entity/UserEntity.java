@@ -38,7 +38,7 @@ public class UserEntity {
                     nullable = false)})
     private List<BadgeEntity> badges;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GoalEntity> goals;
 
     public UserEntity(String email, String password, String name, String role) {
@@ -50,5 +50,16 @@ public class UserEntity {
 
     public UserEntity(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

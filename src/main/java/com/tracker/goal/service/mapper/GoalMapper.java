@@ -19,6 +19,7 @@ public class GoalMapper {
     public Goal mapDomainFromEntity(GoalEntity entity) {
         try {
             return isNull(entity) ? null : Goal.builder()
+                    .id(entity.getId())
                     .title(entity.getTitle())
                     .creationDate(entity.getCreationDate())
                     .estimate(entity.getEstimate())

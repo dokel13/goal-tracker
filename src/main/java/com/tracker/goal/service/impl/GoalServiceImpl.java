@@ -2,6 +2,7 @@ package com.tracker.goal.service.impl;
 
 import com.tracker.goal.domain.Goal;
 import com.tracker.goal.entity.UserEntity;
+import com.tracker.goal.entity.GoalEntity;
 import com.tracker.goal.repository.GoalRepository;
 import com.tracker.goal.repository.UserRepository;
 import com.tracker.goal.service.GoalService;
@@ -27,8 +28,11 @@ public class GoalServiceImpl implements GoalService {
     @Override
     public List<Goal> findAllByUserId(Integer userId) {
         try {
-            List<Goal> goals = goalRepository.findAllByUser(userId);
-
+            System.out.println("UserId: " + userId);
+            List<GoalEntity> goalsEntity = goalRepository.findAllByUser_Id(userId);
+            System.out.println(goalsEntity);
+            List<Goal> goals = goalsEntity.stream().map(GoalMapper::mapDomainFromEntity).collect(Collectors.toList());
+            System.out.println(goals);
             return goals;
         } catch (Exception e) {
             return null;
