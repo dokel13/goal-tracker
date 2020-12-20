@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> geBadgesByUserId(Integer userId) {
-        return badgeRepository.findAllByUsersContaining(getUser(userId))
+        return badgeRepository.findAllByUser(userId)
                 .stream().map(BadgeEntity::getLink).collect(toList());
     }
 

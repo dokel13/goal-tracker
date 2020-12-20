@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface BadgeRepository extends JpaRepository<BadgeEntity, Integer> {
 
-//    @Query(nativeQuery = true, "")
+    @Query(value = "SELECT * FROM badges JOIN users_badges ON badge_id = badge WHERE user = :user", nativeQuery = true)
     List<BadgeEntity> findAllByUser(@Param("user") Integer user);
 }
