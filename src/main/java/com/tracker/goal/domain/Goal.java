@@ -1,5 +1,6 @@
 package com.tracker.goal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,9 +28,11 @@ public class Goal {
     @NotEmpty
     private LocalDateTime creationDate;
 
-    private GoalStatus status;
+    private String status;
 
-    private GoalCategory category;
+    private String category;
 
+    @NotEmpty
+    @JsonIgnore
     private User user;
 }

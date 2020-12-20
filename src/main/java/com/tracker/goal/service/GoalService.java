@@ -13,4 +13,6 @@ public interface GoalService {
     List<Goal> findByCategoryAndUser(String category, Integer id);
 
     Goal save(Goal goal);
+
+    void delete(Integer goalId, Integer userId);
 }

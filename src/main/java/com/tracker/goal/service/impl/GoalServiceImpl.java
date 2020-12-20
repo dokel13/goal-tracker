@@ -2,6 +2,7 @@ package com.tracker.goal.service.impl;
 
 import com.tracker.goal.domain.Goal;
 import com.tracker.goal.entity.UserEntity;
+import com.tracker.goal.exception.ServiceRuntimeException;
 import com.tracker.goal.repository.GoalRepository;
 import com.tracker.goal.repository.UserRepository;
 import com.tracker.goal.service.GoalService;
