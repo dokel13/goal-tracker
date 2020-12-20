@@ -1,5 +1,6 @@
 package com.tracker.goal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tracker.goal.entity.BadgeEntity;
 import com.tracker.goal.entity.GoalEntity;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class User implements UserDetails {
 
     private String name;
 
+    @JsonIgnore
     private List<GoalEntity> goals;
 
     private List<BadgeEntity> badges;

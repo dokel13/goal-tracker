@@ -16,15 +16,16 @@ import static java.util.Objects.isNull;
 @Component
 public class GoalMapper {
 
-    public Goal mapDomainFromEntity(GoalEntity entity) {
+    public static Goal mapDomainFromEntity(GoalEntity entity) {
         try {
             return isNull(entity) ? null : Goal.builder()
+                    .id(entity.getId())
                     .title(entity.getTitle())
                     .creationDate(entity.getCreationDate())
                     .estimate(entity.getEstimate())
                     .daysPassed(entity.getDaysPassed())
                     .status(entity.getStatus())
-                    .user(User.builder().id(entity.getId()).build())
+                    .user(new UserMapper().mapDomainFromEntity(entity.getUser()))
                     .build();
         } catch (Exception exception) {
             String message = "Goal mapping exception!";

@@ -18,7 +18,6 @@ public class GoalController extends UserGetter {
 
     @GetMapping
     public List<Goal> getGoals(){
-
         return goalService.findAllByUserId(getUserFromContext().getId());
     }
 

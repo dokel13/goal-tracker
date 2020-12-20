@@ -46,4 +46,17 @@ public class GoalEntity {
         this.status = status;
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "GoalEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", estimate=" + estimate +
+                ", daysPassed=" + daysPassed +
+                ", creationDate=" + creationDate +
+                ", status='" + status + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
