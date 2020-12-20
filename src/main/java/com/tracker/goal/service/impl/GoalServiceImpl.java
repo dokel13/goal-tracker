@@ -1,6 +1,8 @@
 package com.tracker.goal.service.impl;
 
 import com.tracker.goal.domain.Goal;
+import com.tracker.goal.domain.GoalCategory;
+import com.tracker.goal.domain.GoalStatus;
 import com.tracker.goal.entity.UserEntity;
 import com.tracker.goal.exception.ServiceRuntimeException;
 import com.tracker.goal.repository.GoalRepository;
@@ -35,13 +37,13 @@ public class GoalServiceImpl implements GoalService {
 
     @Override
     public List<Goal> findByStatusAndUser(String status, Integer userId) {
-        return goalRepository.findAllByStatusAndUser(status, getUser(userId))
+        return goalRepository.findAllByStatusAndUser(GoalStatus.valueOf(status.toUpperCase()), getUser(userId))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
     }
 
     @Override
     public List<Goal> findByCategoryAndUser(String category, Integer userId) {
-        return goalRepository.findAllByCategoryAndUser(category, getUser(userId))
+        return goalRepository.findAllByCategoryAndUser(GoalCategory.valueOf(category.toUpperCase()), getUser(userId))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
     }
 

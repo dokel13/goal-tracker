@@ -2,6 +2,7 @@ package com.tracker.goal.controller;
 
 import com.tracker.goal.controller.utils.UserGetter;
 import com.tracker.goal.domain.Goal;
+import com.tracker.goal.domain.GoalCategory;
 import com.tracker.goal.domain.GoalStatus;
 import com.tracker.goal.service.GoalService;
 import lombok.AllArgsConstructor;
