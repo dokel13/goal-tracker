@@ -33,14 +33,26 @@ public class UserMapper {
 
     public UserEntity mapEntityFromDomain(User user) {
         try {
-            return isNull(user) ? null : new UserEntity(user.getEmail(),
-                    user.getPassword(),
-                    user.getName(),
-                    user.getRole().name());
+            return isNull(user) ? null : returnEntity(user);
         } catch (Exception exception) {
             String message = "UserEntity mapping exception!";
             log.debug(message, exception);
             throw new ServiceRuntimeException(exception, message);
+        }
+    }
+
+    private UserEntity returnEntity(User user) {
+        if (user.getId() == null) {
+            return new UserEntity(user.getEmail(),
+                    user.getPassword(),
+                    user.getName(),
+                    user.getRole().name());
+        } else {
+            return new UserEntity(user.getId(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getName(),
+                    user.getRole().name());
         }
     }
 }

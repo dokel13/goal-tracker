@@ -27,10 +27,9 @@ public class Goal {
     @NotEmpty
     private LocalDateTime creationDate;
 
-    private String status;
+    private GoalStatus status;
 
-    private String category;
+    private GoalCategory category;
 
-    @NotEmpty
     private User user;
 }

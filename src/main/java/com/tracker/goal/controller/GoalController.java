@@ -2,12 +2,16 @@ package com.tracker.goal.controller;
 
 import com.tracker.goal.controller.utils.UserGetter;
 import com.tracker.goal.domain.Goal;
+import com.tracker.goal.domain.GoalStatus;
 import com.tracker.goal.service.GoalService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 @RequestMapping("/api/users/goals")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -17,14 +21,22 @@ public class GoalController extends UserGetter {
     private GoalService goalService;
 
     @GetMapping
-    public List<Goal> getGoals(){
+    public List<Goal> getGoals() {
         return goalService.findAllByUserId(getUserFromContext().getId());
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public Goal createGoal(@RequestBody Goal goal){
-
-        return null;
+    public void createGoal(@RequestBody Goal newGoal) {
+        goalService.save(Goal.builder()
+                .category(newGoal.getCategory())
+                .status(GoalStatus.NEW)
+                .title(newGoal.getTitle())
+                .estimate(newGoal.getEstimate())
+                .daysPassed(0)
+                .creationDate(now())
+                .user(getUserFromContext())
+                .build());
     }
 
     @GetMapping("/status/{status}")

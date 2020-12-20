@@ -1,8 +1,6 @@
 package com.tracker.goal.service.mapper;
 
-import com.tracker.goal.domain.Goal;
-import com.tracker.goal.domain.Role;
-import com.tracker.goal.domain.User;
+import com.tracker.goal.domain.*;
 import com.tracker.goal.entity.GoalEntity;
 import com.tracker.goal.entity.UserEntity;
 import com.tracker.goal.exception.DatabaseRuntimeException;
@@ -24,8 +22,8 @@ public class GoalMapper {
                     .creationDate(entity.getCreationDate())
                     .estimate(entity.getEstimate())
                     .daysPassed(entity.getDaysPassed())
-                    .status(entity.getStatus())
-                    .category(entity.getCategory())
+                    .status(GoalStatus.valueOf(entity.getStatus()))
+                    .category(GoalCategory.valueOf(entity.getCategory()))
                     .user(User.builder().id(entity.getId()).build())
                     .build();
         } catch (Exception exception) {
@@ -41,8 +39,8 @@ public class GoalMapper {
                     goal.getEstimate(),
                     goal.getDaysPassed(),
                     goal.getCreationDate(),
-                    goal.getStatus(),
-                    goal.getCategory(),
+                    goal.getStatus().name(),
+                    goal.getCategory().name(),
                     user);
         } catch (Exception exception) {
             String message = "GoalEntity mapping exception!";

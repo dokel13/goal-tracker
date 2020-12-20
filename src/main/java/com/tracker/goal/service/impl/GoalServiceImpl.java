@@ -6,6 +6,7 @@ import com.tracker.goal.repository.GoalRepository;
 import com.tracker.goal.repository.UserRepository;
 import com.tracker.goal.service.GoalService;
 import com.tracker.goal.service.mapper.GoalMapper;
+import com.tracker.goal.service.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class GoalServiceImpl implements GoalService {
     private GoalRepository goalRepository;
     private UserRepository userRepository;
     private GoalMapper goalMapper;
+    private UserMapper userMapper;
 
     @Override
     public List<Goal> findAllByUserId(Integer userId) {
@@ -40,6 +42,12 @@ public class GoalServiceImpl implements GoalService {
     public List<Goal> findByCategoryAndUser(String category, Integer userId) {
         return goalRepository.findAllByCategoryAndUser(category, getUser(userId))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
+    }
+
+    @Override
+    public Goal save(Goal goal) {
+        return goalMapper.mapDomainFromEntity(goalRepository.save(goalMapper
+                .mapEntityFromDomain(goal, userMapper.mapEntityFromDomain(goal.getUser()))));
     }
 
     private UserEntity getUser(Integer userId) {

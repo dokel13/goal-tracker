@@ -48,8 +48,12 @@ public class UserEntity {
         this.role = role;
     }
 
-    public UserEntity(String email) {
+    public UserEntity(int id, String email, String password, String name, String role) {
+        this.id = id;
         this.email = email;
+        this.password = password;
+        this.name = name;
+        this.role = role;
     }
 
     @Override
