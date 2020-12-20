@@ -33,9 +33,9 @@ public class UserEntity {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "users_badges", joinColumns = {
-            @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false, updatable = false)},
+            @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "badge", referencedColumnName = "badge_id",
-                    nullable = false, updatable = false)})
+                    nullable = false)})
     private List<BadgeEntity> badges;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

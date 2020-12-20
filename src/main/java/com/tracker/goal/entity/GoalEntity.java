@@ -34,16 +34,21 @@ public class GoalEntity {
     @Column(name = "status", nullable = false, length = 45)
     private String status;
 
+    @Column(name = "category", nullable = false, length = 45)
+    private String category;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false)
     private UserEntity user;
 
-    public GoalEntity(String title, Integer estimate, Integer daysPassed, LocalDateTime creationDate, String status, UserEntity user) {
+    public GoalEntity(String title, Integer estimate, Integer daysPassed, LocalDateTime creationDate,
+                      String status, String category, UserEntity user) {
         this.title = title;
         this.estimate = estimate;
         this.daysPassed = daysPassed;
         this.creationDate = creationDate;
         this.status = status;
+        this.category = category;
         this.user = user;
     }
 }

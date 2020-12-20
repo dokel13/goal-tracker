@@ -20,8 +20,8 @@ public class BadgeEntity {
     private int id;
 
 
-    @Column(name = "link", unique = true, nullable = false)
-    private int link;
+    @Column(name = "link", unique = true, nullable = false, length = 300)
+    private String link;
 
     @ManyToMany(mappedBy = "badges", fetch = FetchType.LAZY)
     private List<UserEntity> users;

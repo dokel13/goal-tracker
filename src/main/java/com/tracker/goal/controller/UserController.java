@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 @RequestMapping("/api")
@@ -41,7 +43,11 @@ public class UserController extends UserGetter {
 
     @GetMapping("profile/me")
     public User current() {
-
         return getUserFromContext();
+    }
+
+    @GetMapping("/user/badges")
+    public List<String> getUserBadges() {
+        return userService.geBadgesByUserId(getUserFromContext().getId());
     }
 }

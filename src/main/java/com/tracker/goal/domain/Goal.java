@@ -29,6 +29,8 @@ public class Goal {
 
     private String status;
 
+    private String category;
+
     @NotEmpty
     private User user;
 }

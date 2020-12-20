@@ -17,8 +17,7 @@ public class GoalController extends UserGetter {
     private GoalService goalService;
 
     @GetMapping
-    public List<Goal> getGoals(){
-
+    public List<Goal> getGoals() {
         return goalService.findAllByUserId(getUserFromContext().getId());
     }
 
@@ -26,5 +25,15 @@ public class GoalController extends UserGetter {
     public Goal createGoal(@RequestBody Goal goal){
 
         return null;
+    }
+
+    @GetMapping("/status/{status}")
+    public List<Goal> getByStatus(@PathVariable("status") String status) {
+        return goalService.findByStatusAndUser(status, getUserFromContext().getId());
+    }
+
+    @GetMapping("/category/{category}")
+    public List<Goal> getByCategory(@PathVariable("category") String category) {
+        return goalService.findByCategoryAndUser(category, getUserFromContext().getId());
     }
 }
