@@ -1,6 +1,7 @@
 package com.tracker.goal.entity;
 
 import com.tracker.goal.domain.GoalCategory;
+import com.tracker.goal.domain.GoalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,8 @@ public class GoalEntity {
     private LocalDateTime creationDate;
 
     @Column(name = "status", nullable = false, length = 45)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private GoalStatus status;
 
     @Column(name = "category", nullable = false, length = 45)
     @Enumerated(EnumType.STRING)
@@ -44,7 +46,7 @@ public class GoalEntity {
     private UserEntity user;
 
     public GoalEntity(String title, Integer estimate, Integer daysPassed, LocalDateTime creationDate,
-                      String status, GoalCategory category, UserEntity user) {
+                      GoalStatus status, GoalCategory category, UserEntity user) {
         this.title = title;
         this.estimate = estimate;
         this.daysPassed = daysPassed;
