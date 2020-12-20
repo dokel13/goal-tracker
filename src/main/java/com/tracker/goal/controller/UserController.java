@@ -20,7 +20,6 @@ import static org.springframework.security.core.context.SecurityContextHolder.ge
 @RestController
 public class UserController extends UserGetter {
 
-    private UserService userService;
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
