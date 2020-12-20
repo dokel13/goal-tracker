@@ -23,8 +23,6 @@ public class UserMapper {
                     .password(entity.getPassword())
                     .name(entity.getName())
                     .id(entity.getId())
-                    .badges(entity.getBadges())
-                    .goals(entity.getGoals())
                     .build();
         } catch (Exception exception) {
             String message = "User mapping exception!";
