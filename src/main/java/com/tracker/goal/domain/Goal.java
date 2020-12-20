@@ -1,6 +1,5 @@
 package com.tracker.goal.domain;
 
-import com.tracker.goal.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +30,5 @@ public class Goal {
     private String status;
 
     @NotEmpty
-    private UserEntity user;
+    private User user;
 }

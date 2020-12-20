@@ -37,4 +37,13 @@ public class GoalEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false)
     private UserEntity user;
+
+    public GoalEntity(String title, Integer estimate, Integer daysPassed, LocalDateTime creationDate, String status, UserEntity user) {
+        this.title = title;
+        this.estimate = estimate;
+        this.daysPassed = daysPassed;
+        this.creationDate = creationDate;
+        this.status = status;
+        this.user = user;
+    }
 }

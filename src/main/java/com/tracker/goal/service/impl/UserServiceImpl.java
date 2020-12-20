@@ -52,4 +52,11 @@ public class UserServiceImpl implements UserService {
 
         return mapper.mapDomainFromEntity(userRepository.save(mapper.mapEntityFromDomain(user)));
     }
+
+    @Override
+    public User findById(String id) {
+        UserEntity user = userRepository.findById(Integer.parseInt(id)).orElse(null);
+
+        return mapper.mapDomainFromEntity(user);
+    }
 }

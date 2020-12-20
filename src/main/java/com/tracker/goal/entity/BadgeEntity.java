@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,8 +20,9 @@ public class BadgeEntity {
     private int id;
 
 
-    @Column(name = "badge_id", unique = true, nullable = false)
-    private int id;
+    @Column(name = "link", unique = true, nullable = false)
+    private int link;
 
-
+    @ManyToMany(mappedBy = "badges", fetch = FetchType.LAZY)
+    private List<UserEntity> users;
 }

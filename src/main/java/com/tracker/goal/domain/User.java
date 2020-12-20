@@ -24,7 +24,7 @@ public class User implements UserDetails {
 
     private Role role;
 
-    @Pattern(regexp = "^/\\S+@\\S+\\.\\S+/$", message = "Wrong email!")
+    @Pattern(regexp = "^\\S+@\\S+\\.\\S+$", message = "Wrong email!")
     @NotEmpty
     private String email;
 
