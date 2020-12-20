@@ -18,4 +18,5 @@ public interface GoalRepository extends JpaRepository<GoalEntity, Integer> {
     List<GoalEntity> findAllByStatusAndUser(String status, UserEntity user);
 
     List<GoalEntity> findAllByCategoryAndUser(String category, UserEntity user);
+
 }

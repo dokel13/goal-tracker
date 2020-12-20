@@ -2,6 +2,7 @@ package com.tracker.goal.service.impl;
 
 import com.tracker.goal.domain.Goal;
 import com.tracker.goal.entity.UserEntity;
+import com.tracker.goal.exception.ServiceRuntimeException;
 import com.tracker.goal.repository.GoalRepository;
 import com.tracker.goal.repository.UserRepository;
 import com.tracker.goal.service.GoalService;
@@ -40,6 +41,16 @@ public class GoalServiceImpl implements GoalService {
     public List<Goal> findByCategoryAndUser(String category, Integer userId) {
         return goalRepository.findAllByCategoryAndUser(category, getUser(userId))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
+    }
+
+    @Override
+    public void delete(Integer goalId, Integer userId) {
+        boolean anyMatch = findAllByUserId(userId).stream().map(Goal::getId).anyMatch(id -> id.equals(goalId));
+        if (anyMatch) {
+            goalRepository.deleteById(goalId);
+        } else {
+            throw new ServiceRuntimeException("Cannot delete goal!!!");
+        }
     }
 
     private UserEntity getUser(Integer userId) {

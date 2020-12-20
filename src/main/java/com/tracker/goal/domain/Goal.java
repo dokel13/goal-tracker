@@ -1,5 +1,6 @@
 package com.tracker.goal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +33,6 @@ public class Goal {
     private String category;
 
     @NotEmpty
+    @JsonIgnore
     private User user;
 }

@@ -27,6 +27,12 @@ public class GoalController extends UserGetter {
         return null;
     }
 
+    @DeleteMapping("/{goalId}")
+    public void delete(@PathVariable Integer goalId){
+        Integer userId = getUserFromContext().getId();
+        goalService.delete(goalId, userId);
+    }
+
     @GetMapping("/status/{status}")
     public List<Goal> getByStatus(@PathVariable("status") String status) {
         return goalService.findByStatusAndUser(status, getUserFromContext().getId());
