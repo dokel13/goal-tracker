@@ -30,7 +30,7 @@ public class Goal {
 
     private String status;
 
-    private String category;
+    private GoalCategory category;
 
     @NotEmpty
     @JsonIgnore
