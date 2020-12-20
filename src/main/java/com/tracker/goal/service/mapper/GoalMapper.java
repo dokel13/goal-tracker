@@ -22,8 +22,8 @@ public class GoalMapper {
                     .creationDate(entity.getCreationDate())
                     .estimate(entity.getEstimate())
                     .daysPassed(entity.getDaysPassed())
-                    .status(GoalStatus.valueOf(entity.getStatus()))
-                    .category(GoalCategory.valueOf(entity.getCategory()))
+                    .status(entity.getStatus())
+                    .category(entity.getCategory())
                     .user(User.builder().id(entity.getId()).build())
                     .build();
         } catch (Exception exception) {
@@ -39,8 +39,8 @@ public class GoalMapper {
                     goal.getEstimate(),
                     goal.getDaysPassed(),
                     goal.getCreationDate(),
-                    goal.getStatus().name(),
-                    goal.getCategory().name(),
+                    goal.getStatus(),
+                    goal.getCategory(),
                     user);
         } catch (Exception exception) {
             String message = "GoalEntity mapping exception!";

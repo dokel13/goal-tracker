@@ -51,6 +51,16 @@ public class GoalServiceImpl implements GoalService {
                 .mapEntityFromDomain(goal, userMapper.mapEntityFromDomain(goal.getUser()))));
     }
 
+    @Override
+    public void delete(Integer goalId, Integer userId) {
+        boolean anyMatch = findAllByUserId(userId).stream().map(Goal::getId).anyMatch(id -> id.equals(goalId));
+        if (anyMatch) {
+            goalRepository.deleteById(goalId);
+        } else {
+            throw new ServiceRuntimeException("Cannot delete goal!!!");
+        }
+    }
+
     private UserEntity getUser(Integer userId) {
         return userRepository.findById(userId).orElse(null);
     }
