@@ -41,9 +41,11 @@ public class UserController extends UserGetter {
         return user;
     }
 
-    @GetMapping("profile/me")
+    @GetMapping("/profile/me")
     public User current() {
-        return getUserFromContext();
+        User user = getUserFromContext();
+
+        return user;
     }
 
     @GetMapping("/user/badges")

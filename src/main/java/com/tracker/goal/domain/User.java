@@ -35,11 +35,6 @@ public class User implements UserDetails {
 
     private String name;
 
-    @JsonIgnore
-    private List<GoalEntity> goals;
-
-    private List<BadgeEntity> badges;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
