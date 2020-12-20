@@ -5,5 +5,6 @@ import com.tracker.goal.domain.Goal;
 import java.util.List;
 
 public interface GoalService {
-    public List<Goal> findAllByUserId(Integer userId);
+
+    List<Goal> findAllByUserId(Integer userId);
 }
