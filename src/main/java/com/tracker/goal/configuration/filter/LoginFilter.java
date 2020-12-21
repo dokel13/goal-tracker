@@ -40,9 +40,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
                         user.getPassword(),
-                        Collections.emptyList()
-                )
-        );
+                        Collections.emptyList()));
     }
 
     @Override
@@ -53,6 +51,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
         String jwt_user_token = userDetails.getUsername() + " ";
+
         for (GrantedAuthority authority : userDetails.getAuthorities()) {
             jwt_user_token += authority.getAuthority();
         }

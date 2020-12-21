@@ -61,7 +61,9 @@ public class GoalServiceImpl implements GoalService {
         if (anyMatch) {
             goalRepository.deleteById(goalId);
         } else {
-            throw new ServiceRuntimeException("Cannot delete goal!!!");
+            String message = "Cannot delete goal!!!";
+            log.info(message);
+            throw new ServiceRuntimeException(message);
         }
     }
 

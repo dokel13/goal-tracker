@@ -23,7 +23,6 @@ public class UserMapperTest {
             .build();
 
 
-
     private final UserEntity entity = new UserEntity(
             "email",
             "password",

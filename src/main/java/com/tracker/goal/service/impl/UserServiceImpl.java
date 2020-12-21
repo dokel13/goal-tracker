@@ -75,7 +75,9 @@ public class UserServiceImpl implements UserService {
             user.setFriends(friends);
             userRepository.save(user);
         } else {
-            throw new ServiceRuntimeException("Cannot add friend!!!");
+            String message = "Cannot add friend!!!";
+            log.info(message);
+            throw new ServiceRuntimeException(message);
         }
     }
 }

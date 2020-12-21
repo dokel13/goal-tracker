@@ -25,11 +25,13 @@ public class UserMapper {
                     .password(entity.getPassword())
                     .name(entity.getName())
                     .id(entity.getId())
-                    .friends(entity.getFriends().stream()
+                    .friends(isNull(entity.getFriends()) ? null : entity.getFriends()
+                            .stream()
                             .map(this::mapDomainFromEntity)
                             .peek(user -> user.setFriends(null))
                             .collect(toList()))
-                    .badges(entity.getBadges().stream()
+                    .badges(isNull(entity.getBadges()) ? null : entity.getBadges()
+                            .stream()
                             .map(BadgeEntity::getLink).collect(toList()))
                     .build();
         } catch (Exception exception) {

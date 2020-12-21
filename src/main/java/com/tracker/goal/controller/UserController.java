@@ -42,7 +42,7 @@ public class UserController extends UserGetter {
     }
 
     @PostMapping("/friends/{friendId}")
-    public void addFriend(@PathVariable Integer friendId){
+    public void addFriend(@PathVariable Integer friendId) {
         userService.addFriend(getUserFromContext().getId(), friendId);
     }
 }

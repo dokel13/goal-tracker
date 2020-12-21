@@ -22,13 +22,12 @@ public class AuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler
     private final static Map<String, String> ROLE_TARGET_URL_MAP = new HashMap<>();
 
     static {
-        ROLE_TARGET_URL_MAP.put("USER", "/api/user?");
+        ROLE_TARGET_URL_MAP.put("USER", "/api/user");
     }
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        Authentication authentication) throws IOException {
-        System.out.println("AuthenticationHandler.handle - "+request.getAttributeNames().toString());
         RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
         String targetUrl = determineTargetUrl(authentication) + request.getQueryString();
         if (response.isCommitted()) {
