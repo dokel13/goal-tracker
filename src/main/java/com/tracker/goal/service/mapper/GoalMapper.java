@@ -1,6 +1,7 @@
 package com.tracker.goal.service.mapper;
 
-import com.tracker.goal.domain.*;
+import com.tracker.goal.domain.Goal;
+import com.tracker.goal.domain.User;
 import com.tracker.goal.entity.GoalEntity;
 import com.tracker.goal.entity.UserEntity;
 import com.tracker.goal.exception.DatabaseRuntimeException;

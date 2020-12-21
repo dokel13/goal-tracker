@@ -3,10 +3,9 @@ package com.tracker.goal.service.impl;
 import com.tracker.goal.domain.Goal;
 import com.tracker.goal.domain.GoalCategory;
 import com.tracker.goal.domain.GoalStatus;
-import com.tracker.goal.entity.UserEntity;
+import com.tracker.goal.domain.User;
 import com.tracker.goal.exception.ServiceRuntimeException;
 import com.tracker.goal.repository.GoalRepository;
-import com.tracker.goal.repository.UserRepository;
 import com.tracker.goal.service.GoalService;
 import com.tracker.goal.service.mapper.GoalMapper;
 import com.tracker.goal.service.mapper.UserMapper;
@@ -14,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ import static java.util.stream.Collectors.toList;
 public class GoalServiceImpl implements GoalService {
 
     private GoalRepository goalRepository;
-    private UserRepository userRepository;
     private GoalMapper goalMapper;
     private UserMapper userMapper;
 
@@ -36,23 +35,26 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Override
-    public List<Goal> findByStatusAndUser(String status, Integer userId) {
-        return goalRepository.findAllByStatusAndUser(GoalStatus.valueOf(status.toUpperCase()), getUser(userId))
+    public List<Goal> findByStatusAndUser(String status, User user) {
+        return goalRepository.findAllByStatusAndUser(GoalStatus
+                .valueOf(status.toUpperCase()), userMapper.mapEntityFromDomain(user))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
     }
 
     @Override
-    public List<Goal> findByCategoryAndUser(String category, Integer userId) {
-        return goalRepository.findAllByCategoryAndUser(GoalCategory.valueOf(category.toUpperCase()), getUser(userId))
+    public List<Goal> findByCategoryAndUser(String category, User user) {
+        return goalRepository.findAllByCategoryAndUser(GoalCategory
+                .valueOf(category.toUpperCase()), userMapper.mapEntityFromDomain(user))
                 .stream().map(goalMapper::mapDomainFromEntity).collect(toList());
     }
 
     @Override
-    public Goal save(Goal goal) {
-        return goalMapper.mapDomainFromEntity(goalRepository.save(goalMapper
-                .mapEntityFromDomain(goal, userMapper.mapEntityFromDomain(goal.getUser()))));
+    public void save(Goal goal) {
+        goalRepository.save(goalMapper
+                .mapEntityFromDomain(goal, userMapper.mapEntityFromDomain(goal.getUser())));
     }
 
+    @Transactional
     @Override
     public void delete(Integer goalId, Integer userId) {
         boolean anyMatch = findAllByUserId(userId).stream().map(Goal::getId).anyMatch(id -> id.equals(goalId));
@@ -63,7 +65,20 @@ public class GoalServiceImpl implements GoalService {
         }
     }
 
-    private UserEntity getUser(Integer userId) {
-        return userRepository.findById(userId).orElse(null);
+    @Transactional
+    @Override
+    public void update(Goal goal) {
+        goalRepository.update(goal.getId(),
+                goal.getTitle(),
+                goal.getCategory(),
+                goal.getEstimate(),
+                goal.getDaysPassed(),
+                goal.getStatus(),
+                userMapper.mapEntityFromDomain(goal.getUser()));
+    }
+
+    @Override
+    public Goal findById(Integer id) {
+        return goalMapper.mapDomainFromEntity(goalRepository.findById(id).orElse(null));
     }
 }

@@ -5,7 +5,6 @@ import com.tracker.goal.domain.Role;
 import com.tracker.goal.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,6 @@ public class UserController extends UserGetter {
 
     private AuthenticationManager authenticationManager;
 
-    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/register")
     public void register(@Validated @RequestBody User newUser) {
         userService.register(User.builder()
