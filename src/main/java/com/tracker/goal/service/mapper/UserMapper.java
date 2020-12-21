@@ -8,6 +8,7 @@ import com.tracker.goal.exception.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import static com.tracker.goal.domain.User.builder;
 import static java.util.Objects.isNull;
 
 @Slf4j
@@ -16,7 +17,7 @@ public class UserMapper {
 
     public User mapDomainFromEntity(UserEntity entity) {
         try {
-            return isNull(entity) ? null : User.builder()
+            return isNull(entity) ? null : builder()
                     .role(Role.valueOf(entity
                             .getRole()))
                     .email(entity.getEmail())

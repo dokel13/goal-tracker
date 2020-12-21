@@ -1,8 +1,5 @@
 package com.tracker.goal.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tracker.goal.entity.BadgeEntity;
-import com.tracker.goal.entity.GoalEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
