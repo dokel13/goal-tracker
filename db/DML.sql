@@ -19,3 +19,23 @@ INSERT INTO `users` VALUES (12,'ihor@gmail.com','Ihor','$2a$10$UZg.i8NHc9EghbvSz
 INSERT INTO `users` VALUES (13,'max@gmail.com','Max','$2a$10$xB4Q8UuxhN6pE0XBj5I30uw1vUe0mRmT3p3aLqdndDW8qweoTPGaG','USER');
 INSERT INTO `users`	VALUES (14,'nazar@ukr.net','Назар','$2a$10$HqCNXBf0hrEURC91zLnvPuAVsXxbhMcjW7jUcoovEMxhjnA9hpIVO','USER');
 INSERT INTO `users`	VALUES (15,'tommy@gmail.com','Tommy Wiseau','$2a$10$x.egx66qBqksLrGdO3thx.VUHUgSKfUCWmgmPhwBKj6XaL9lucs1u','USER');
+
+INSERT INTO `users_users` VALUES
+                                 (2,3), (2,4), (2,5),
+                                 (2,8), (5,7), (5,8),
+                                 (9,10), (9,11), (9,12),
+                                 (13,14), (13,15);
+
+INSERT INTO `users_badges` VALUES
+                                  (2,1), (2,2), (2,3),
+                                  (3,2), (3,3), (3,4),
+                                  (4,3), (4,4), (4,5),
+                                  (5,1), (5,2),
+                                  (6,2), (6,3), (6,4),
+                                  (7,3), (7,4), (7,5),
+                                  (8,1), (8,2), (8,3),
+                                  (9,2), (9,3),
+                                  (10,3), (10,4), (10,5),
+                                  (11,1), (11,2), (11,3),
+                                  (12,2), (12,3), (11,4),
+                                  (13,3), (13,4), (13,5);
