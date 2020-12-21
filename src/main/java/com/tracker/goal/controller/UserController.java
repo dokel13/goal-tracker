@@ -3,6 +3,7 @@ package com.tracker.goal.controller;
 import com.tracker.goal.controller.utils.UserGetter;
 import com.tracker.goal.domain.Role;
 import com.tracker.goal.domain.User;
+import com.tracker.goal.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,8 @@ import java.util.List;
 public class UserController extends UserGetter {
 
     private AuthenticationManager authenticationManager;
+
+    private UserService userService;
 
     @PostMapping("/register")
     public void register(@Validated @RequestBody User newUser) {
@@ -36,5 +39,10 @@ public class UserController extends UserGetter {
     @GetMapping("/user/badges")
     public List<String> getUserBadges() {
         return userService.geBadgesByUserId(getUserFromContext().getId());
+    }
+
+    @PostMapping("friends/{friendId}")
+    public void addFriend(@PathVariable Integer friendId){
+        userService.addFriend(getUserFromContext().getId(), friendId);
     }
 }

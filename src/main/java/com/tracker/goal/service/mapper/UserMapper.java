@@ -8,13 +8,15 @@ import com.tracker.goal.exception.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 import static java.util.Objects.isNull;
 
 @Slf4j
 @Component
 public class UserMapper {
 
-    public User mapDomainFromEntity(UserEntity entity) {
+    public static User mapDomainFromEntity(UserEntity entity) {
         try {
             return isNull(entity) ? null : User.builder()
                     .role(Role.valueOf(entity
@@ -23,6 +25,10 @@ public class UserMapper {
                     .password(entity.getPassword())
                     .name(entity.getName())
                     .id(entity.getId())
+                    .friends(entity.getFriends().stream()
+                            .map(UserMapper::mapDomainFromEntity)
+                            .peek(user -> user.setFriends(null))
+                            .collect(Collectors.toList()))
                     .build();
         } catch (Exception exception) {
             String message = "User mapping exception!";
