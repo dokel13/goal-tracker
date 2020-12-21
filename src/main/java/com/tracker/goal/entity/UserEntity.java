@@ -47,7 +47,7 @@ public class UserEntity {
             @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "friend_id", referencedColumnName = "user_id",
                     nullable = false)})
-    private List<UserEntity> friends = new ArrayList<>();
+    private List<UserEntity> friends;
 
     public UserEntity(String email, String password, String name, String role) {
         this.email = email;
