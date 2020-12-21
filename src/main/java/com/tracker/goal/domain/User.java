@@ -32,6 +32,8 @@ public class User implements UserDetails {
 
     private String name;
 
+    private List<User> friends;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

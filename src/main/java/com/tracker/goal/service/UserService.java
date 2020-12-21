@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
     User register(User user);
 
     List<String> geBadgesByUserId(Integer id);
+
+    void addFriend(Integer userId, Integer friendId);
 }

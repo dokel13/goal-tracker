@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -40,6 +41,13 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GoalEntity> goals;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_users", joinColumns = {
+            @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id", referencedColumnName = "user_id",
+                    nullable = false)})
+    private List<UserEntity> friends = new ArrayList<>();
 
     public UserEntity(String email, String password, String name, String role) {
         this.email = email;
