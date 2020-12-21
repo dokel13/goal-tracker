@@ -34,6 +34,8 @@ public class User implements UserDetails {
 
     private List<User> friends;
 
+    private List<String> badges;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

@@ -2,16 +2,15 @@ package com.tracker.goal.service.mapper;
 
 import com.tracker.goal.domain.Role;
 import com.tracker.goal.domain.User;
+import com.tracker.goal.entity.BadgeEntity;
 import com.tracker.goal.entity.UserEntity;
 import com.tracker.goal.exception.DatabaseRuntimeException;
 import com.tracker.goal.exception.ServiceRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
-import static com.tracker.goal.domain.User.builder;
 import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Component
@@ -19,7 +18,7 @@ public class UserMapper {
 
     public User mapDomainFromEntity(UserEntity entity) {
         try {
-            return isNull(entity) ? null : builder()
+            return isNull(entity) ? null : User.builder()
                     .role(Role.valueOf(entity
                             .getRole()))
                     .email(entity.getEmail())
@@ -27,9 +26,11 @@ public class UserMapper {
                     .name(entity.getName())
                     .id(entity.getId())
                     .friends(entity.getFriends().stream()
-                            .map(UserMapper::mapDomainFromEntity)
+                            .map(this::mapDomainFromEntity)
                             .peek(user -> user.setFriends(null))
-                            .collect(Collectors.toList()))
+                            .collect(toList()))
+                    .badges(entity.getBadges().stream()
+                            .map(BadgeEntity::getLink).collect(toList()))
                     .build();
         } catch (Exception exception) {
             String message = "User mapping exception!";

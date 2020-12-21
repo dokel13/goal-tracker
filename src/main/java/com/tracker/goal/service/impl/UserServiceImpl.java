@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -71,16 +70,12 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> friends = user.getFriends();
         UserEntity friend = userRepository.findById(friendId).get();
         boolean noneMatch = user.getFriends().stream().noneMatch(userEntity -> userEntity.equals(friend));
-        if (noneMatch && !userId.equals(friendId)){
+        if (noneMatch && !userId.equals(friendId)) {
             friends.add(friend);
             user.setFriends(friends);
             userRepository.save(user);
-        }else {
+        } else {
             throw new ServiceRuntimeException("Cannot add friend!!!");
         }
-    }
-
-    private UserEntity getUser(Integer userId) {
-        return userRepository.findById(userId).orElse(null);
     }
 }

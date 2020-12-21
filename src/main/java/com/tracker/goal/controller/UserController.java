@@ -41,7 +41,7 @@ public class UserController extends UserGetter {
         return userService.geBadgesByUserId(getUserFromContext().getId());
     }
 
-    @PostMapping("friends/{friendId}")
+    @PostMapping("/friends/{friendId}")
     public void addFriend(@PathVariable Integer friendId){
         userService.addFriend(getUserFromContext().getId(), friendId);
     }
