@@ -53,7 +53,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                         "/api/error")
                 .permitAll()
                 .antMatchers("/api/profile",
-                        "/api/users")
+                        "/api/user",
+                        "/api/users",
+                        "/api/friends")
                 .hasAuthority("USER")
                 .anyRequest()
                 .authenticated()
